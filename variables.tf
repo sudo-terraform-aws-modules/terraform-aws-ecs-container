@@ -1,13 +1,13 @@
 variable "name" {
-  type = string
+  type        = string
   description = "(optional) Container Name. Default: randomly generated name"
-  default = "default"
+  default     = "default"
 }
 
 variable "image" {
-  type = string
+  type        = string
   description = "(optional) Container Image. Default: nginx"
-  default = "nginx:latest"
+  default     = "nginx:latest"
 }
 
 variable "memory" {
@@ -23,31 +23,20 @@ variable "memory_reservation" {
 }
 
 variable "container_ports" {
-  type = list(number)
+  type        = list(number)
   description = "(optional) Container ports, use this if you don't want to specify host ports."
-  default = [ 8080 ]
+  default     = [8080]
 }
 variable "port_mappings" {
   type = list(object({
     container_port = number
     host_port      = number
-    protocol      = string
+    protocol       = string
   }))
 
-  description = ""
+  description = "(optional) Use container_ports unless you want to explicitly specify host ports which is not recommended. Default: []"
 
-  default = [
-        {
-      container_port = 8082
-      host_port      = 8082
-      protocol      = "tcp"
-    },
-    {
-      container_port = 8081
-      host_port      = 8081
-      protocol      = "udp"
-    }
-  ]
+  default = []
 }
 
 variable "environment" {
@@ -56,18 +45,18 @@ variable "environment" {
     value = string
   }))
   description = "(optional) Environment variables"
-  default = []
+  default     = []
 }
 
 
 variable "environment_files" {
   type = list(object({
-    value  = string
-    type = string
+    value = string
+    type  = string
   }))
   description = "(optional) Environment files"
-  default = []
- validation {
+  default     = []
+  validation {
     condition = alltrue([
       for item in var.environment_files : item.type == "s3"
     ])
@@ -77,15 +66,15 @@ variable "environment_files" {
 
 variable "secrets" {
   type = list(object({
-    name  = string
+    name       = string
     value_from = string
   }))
   description = "(optional) describe your variable"
-  default = []
+  default     = []
 }
 
 variable "privileged" {
-  type = bool
+  type        = bool
   description = "(optional) The containers should run in privileged mode? Default: false"
-  default = false
+  default     = false
 }
