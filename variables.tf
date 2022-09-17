@@ -53,6 +53,23 @@ variable "environment" {
   default     = []
 }
 
+variable "entry_point" {
+  type        = string
+  description = "(optional) Specify the custom entry point for the container. Default uses the ENTRYPOINT specified in container image."
+  default     = null
+}
+
+variable "working_directory" {
+  type        = string
+  description = "(optional) Specify the working directory for the container. Default uses the WORKDIR specified in the container image."
+  default     = null
+}
+
+variable "command" {
+  type        = string
+  description = "(optional) Specify the custom command for the container. Default uses the CMD specified in the container image."
+  default     = null
+}
 
 variable "environment_files" {
   type = list(object({

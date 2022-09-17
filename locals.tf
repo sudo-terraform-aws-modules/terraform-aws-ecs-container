@@ -29,6 +29,9 @@ locals {
     secrets           = local.secrets_syntehsized
     portMappings      = concat(local.container_port_mappings, local.port_mappings_synthesized)
     privileged        = var.privileged
+    entryPoint        = var.entry_point
+    command           = var.command
+    workingDirectory  = var.working_directory
   }
 
   container_definition_keys = compact([for key, value in local.container_definition_template : value != null ? key : ""])
