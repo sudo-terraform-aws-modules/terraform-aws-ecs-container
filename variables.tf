@@ -19,7 +19,7 @@ variable "memory" {
 variable "cpu" {
   type        = number
   description = "(optional) Specify the number of CPUs for the container. Default: 512"
-  default     = 512
+  default     = 256
 }
 variable "memory_reservation" {
   type        = number
