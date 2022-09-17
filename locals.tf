@@ -21,6 +21,7 @@ locals {
   container_definition_template = {
     name              = var.name
     image             = var.image
+    cpu               = var.cpu
     memory            = var.memory
     memoryReservation = var.memory_reservation
     environment       = var.environment

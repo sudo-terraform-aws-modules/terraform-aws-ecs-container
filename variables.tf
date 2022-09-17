@@ -16,6 +16,11 @@ variable "memory" {
   default     = 512
 }
 
+variable "cpu" {
+  type        = number
+  description = "(optional) Specify the number of CPUs for the container. Default: 512"
+  default     = 512
+}
 variable "memory_reservation" {
   type        = number
   description = "The soft limit (in MiB) of memory to reserve for the container. When system memory is under contention, Docker attempts to keep the container memory to this soft limit."
