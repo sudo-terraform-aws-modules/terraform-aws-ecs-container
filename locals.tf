@@ -32,6 +32,7 @@ locals {
     entryPoint        = var.entry_point
     command           = var.command
     workingDirectory  = var.working_directory
+    logConfiguration  = var.log_configuration
   }
 
   container_definition_keys = compact([for key, value in local.container_definition_template : value != null ? key : ""])

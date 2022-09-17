@@ -100,3 +100,9 @@ variable "privileged" {
   description = "(optional) The containers should run in privileged mode? Default: false"
   default     = false
 }
+
+variable "log_configuration" {
+  type        = any
+  description = "The log configuration specification for the container."
+  default     = null
+}
