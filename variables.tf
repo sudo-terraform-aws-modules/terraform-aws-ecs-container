@@ -66,7 +66,7 @@ variable "working_directory" {
 }
 
 variable "command" {
-  type        = string
+  type        = list(string)
   description = "(optional) Specify the custom command for the container. Default uses the CMD specified in the container image."
   default     = null
 }
