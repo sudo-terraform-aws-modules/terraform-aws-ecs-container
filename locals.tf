@@ -24,6 +24,7 @@ locals {
     cpu               = var.cpu
     memory            = var.memory
     memoryReservation = var.memory_reservation
+    essential         = var.essential
     environment       = var.environment
     environmentFiles  = var.environment_files
     secrets           = local.secrets_syntehsized

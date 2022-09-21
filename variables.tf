@@ -71,6 +71,12 @@ variable "command" {
   default     = null
 }
 
+variable "essential" {
+  type        = bool
+  description = "(optional) Specify if the container is essential"
+  default     = true
+}
+
 variable "environment_files" {
   type = list(object({
     value = string
