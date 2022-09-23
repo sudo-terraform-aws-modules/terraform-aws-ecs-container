@@ -19,21 +19,22 @@ locals {
     }
   ]
   container_definition_template = {
-    name              = var.name
-    image             = var.image
-    cpu               = var.cpu
-    memory            = var.memory
-    memoryReservation = var.memory_reservation
-    essential         = var.essential
-    environment       = var.environment
-    environmentFiles  = var.environment_files
-    secrets           = local.secrets_syntehsized
-    portMappings      = concat(local.container_port_mappings, local.port_mappings_synthesized)
-    privileged        = var.privileged
-    entryPoint        = var.entry_point
-    command           = var.command
-    workingDirectory  = var.working_directory
-    logConfiguration  = var.log_configuration
+    name                   = var.name
+    image                  = var.image
+    cpu                    = var.cpu
+    memory                 = var.memory
+    memoryReservation      = var.memory_reservation
+    essential              = var.essential
+    environment            = var.environment
+    environmentFiles       = var.environment_files
+    secrets                = local.secrets_syntehsized
+    portMappings           = concat(local.container_port_mappings, local.port_mappings_synthesized)
+    privileged             = var.privileged
+    entryPoint             = var.entry_point
+    command                = var.command
+    workingDirectory       = var.working_directory
+    logConfiguration       = var.log_configuration
+    readonlyRootFilesystem = var.readonly_root_filesystem
   }
 
   container_definition_keys = compact([for key, value in local.container_definition_template : value != null ? key : ""])

@@ -112,3 +112,9 @@ variable "log_configuration" {
   description = "The log configuration specification for the container."
   default     = null
 }
+
+variable "readonly_root_filesystem" {
+  type        = bool
+  description = "(optional) Specify if the root file system should be readonly. Default: true"
+  default     = true
+}
