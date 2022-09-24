@@ -67,7 +67,13 @@ variable "working_directory" {
 
 variable "command" {
   type        = list(string)
-  description = "(optional) Specify the custom command for the container. Default uses the CMD specified in the container image."
+  description = "(optional) Specify the custom command for the container. Overrides comamnd_str if specified. Default uses the CMD specified in the container image."
+  default     = null
+}
+
+variable "command_str" {
+  type        = string
+  description = "(optional) Specify the command in string format which will be converted to list. Default: null"
   default     = null
 }
 

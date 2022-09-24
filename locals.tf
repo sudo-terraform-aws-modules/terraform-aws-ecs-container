@@ -18,6 +18,10 @@ locals {
       for key, value in mapping : local.task_definition_param_mappings[key] => value
     }
   ]
+
+  command_str_synthesized = var.command_str != null ? split(" ", var.command_str) : []
+  command_synthesized     = var.command != null ? var.command : local.command_str_synthesized
+
   container_definition_template = {
     name                   = var.name
     image                  = var.image
@@ -31,7 +35,7 @@ locals {
     portMappings           = concat(local.container_port_mappings, local.port_mappings_synthesized)
     privileged             = var.privileged
     entryPoint             = var.entry_point
-    command                = var.command
+    command                = local.command_synthesized
     workingDirectory       = var.working_directory
     logConfiguration       = var.log_configuration
     readonlyRootFilesystem = var.readonly_root_filesystem
