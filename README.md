@@ -1,5 +1,16 @@
-# sudo-terraform-module-template
-Template repository for Terraform modules
+# Terraform AWS ECS Container Definition
+
+Terraform module to create container defintion for ECS Task definiton.
+
+## Usage
+```hcl
+module "ecs-container-anycable" {
+  source                   = "sudo-terraform-aws-modules/ecs-container/aws"
+  version                  = "1.0.4"
+  name                     = "container_name"
+  image                    = "container_image:latest"
+}
+```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
