@@ -54,7 +54,7 @@ variable "environment" {
 }
 
 variable "entry_point" {
-  type        = string
+  type        = list(string)
   description = "(optional) Specify the custom entry point for the container. Default uses the ENTRYPOINT specified in container image."
   default     = null
 }
