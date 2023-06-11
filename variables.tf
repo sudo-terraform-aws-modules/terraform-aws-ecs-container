@@ -124,3 +124,12 @@ variable "readonly_root_filesystem" {
   description = "(optional) Specify if the root file system should be readonly. Default: true"
   default     = true
 }
+
+variable "mount_points" {
+  type = list(object({
+    name       = string
+    value_from = string
+  }))
+  description = "(optional) List the mount points"
+  default     = []
+}

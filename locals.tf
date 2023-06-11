@@ -6,6 +6,7 @@ locals {
     "protocol"       = "protocol"
     "value_from"     = "valueFrom"
     "name"           = "name"
+    "mount_points"   = "mountPoints"
   }
   port_mappings_synthesized = [
     for mapping in var.port_mappings : {
@@ -18,7 +19,11 @@ locals {
       for key, value in mapping : local.task_definition_param_mappings[key] => value
     }
   ]
-
+  mount_points_syntehsized = [
+    for mapping in var.mount_points : {
+      for key, value in mapping : local.task_definition_param_mappings[key] => value
+    }
+  ]
   command_str_synthesized = var.command_str != null ? split(" ", var.command_str) : []
   command_synthesized     = var.command != null ? var.command : local.command_str_synthesized
 
@@ -39,6 +44,7 @@ locals {
     workingDirectory       = var.working_directory
     logConfiguration       = var.log_configuration
     readonlyRootFilesystem = var.readonly_root_filesystem
+    mountPoints            = local.mount_points_syntehsized
   }
 
   container_definition_keys = compact([for key, value in local.container_definition_template : value != null ? key : ""])
