@@ -127,9 +127,14 @@ variable "readonly_root_filesystem" {
 
 variable "mount_points" {
   type = list(object({
-    name       = string
-    value_from = string
+    source_volume  = string
+    container_path = string
+    read_only      = bool
   }))
   description = "(optional) List the mount points"
-  default     = []
+  default = [{
+    source_volume  = null
+    container_path = null
+    read_only      = false
+  }]
 }

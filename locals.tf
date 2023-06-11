@@ -7,6 +7,9 @@ locals {
     "value_from"     = "valueFrom"
     "name"           = "name"
     "mount_points"   = "mountPoints"
+    "source_volume"  = "sourceVolume"
+    "container_path" = "containerPath"
+    "read_only"      = "readOnly"
   }
   port_mappings_synthesized = [
     for mapping in var.port_mappings : {
