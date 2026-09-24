@@ -29,8 +29,8 @@ variable "memory_reservation" {
 
 variable "container_ports" {
   type        = list(number)
-  description = "(optional) Container ports, use this if you don't want to specify host ports."
-  default     = [8080]
+  description = "(optional) Container ports, use this if you don't want to specify host ports. Default: []"
+  default     = []
 }
 variable "port_mappings" {
   type = list(object({
@@ -131,10 +131,30 @@ variable "mount_points" {
     container_path = string
     read_only      = bool
   }))
-  description = "(optional) List the mount points"
-  default = [{
-    source_volume  = null
-    container_path = null
-    read_only      = false
-  }]
+  description = "(optional) Mount points to add to the container. source_volume must match a volume defined in the task definition."
+  default     = []
+}
+
+variable "stop_timeout" {
+  type        = number
+  description = "(optional) Time (in seconds) to wait before the container is forcefully killed if it doesn't stop gracefully. Default: null (uses Docker default of 30s)"
+  default     = null
+}
+
+variable "docker_labels" {
+  type        = map(string)
+  description = "(optional) Docker labels to add to the container. Default: null"
+  default     = null
+}
+
+variable "health_check" {
+  type = object({
+    command     = list(string)
+    interval    = optional(number, 30)
+    timeout     = optional(number, 5)
+    retries     = optional(number, 3)
+    startPeriod = optional(number, null)
+  })
+  description = "(optional) Container health check configuration. Default: null (uses health check from the container image)"
+  default     = null
 }
