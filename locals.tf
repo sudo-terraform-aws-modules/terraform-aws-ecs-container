@@ -17,12 +17,12 @@ locals {
     }
   ]
 
-  secrets_syntehsized = [
+  secrets_synthesized = [
     for mapping in var.secrets : {
       for key, value in mapping : local.task_definition_param_mappings[key] => value
     }
   ]
-  mount_points_syntehsized = [
+  mount_points_synthesized = [
     for mapping in var.mount_points : {
       for key, value in mapping : local.task_definition_param_mappings[key] => value
     }
@@ -39,15 +39,18 @@ locals {
     essential              = var.essential
     environment            = var.environment
     environmentFiles       = var.environment_files
-    secrets                = local.secrets_syntehsized
+    secrets                = local.secrets_synthesized
     portMappings           = concat(local.container_port_mappings, local.port_mappings_synthesized)
     privileged             = var.privileged
     entryPoint             = var.entry_point
-    command                = local.command_synthesized
+    command                = length(local.command_synthesized) > 0 ? local.command_synthesized : null
     workingDirectory       = var.working_directory
     logConfiguration       = var.log_configuration
     readonlyRootFilesystem = var.readonly_root_filesystem
-    mountPoints            = local.mount_points_syntehsized
+    mountPoints            = local.mount_points_synthesized
+    stopTimeout            = var.stop_timeout
+    dockerLabels           = var.docker_labels
+    healthCheck            = var.health_check
   }
 
   container_definition_keys = compact([for key, value in local.container_definition_template : value != null ? key : ""])
